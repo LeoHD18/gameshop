@@ -1,0 +1,126 @@
+<html>
+    <%- include("../partials/header.ejs") %>
+
+    <body>
+       <div class = "container">
+            <div class = "row">
+                <div class="col-1" ></div>
+                <div class="col-10">
+
+                    <h1>Game shop</h1>
+                    <div row class ="row g-3 bg-light" >
+                        <div class="col-5">
+                            <form class="d-flex" role="search">
+                                <input class="form-control me-2" type="search" placeholder="Search" id="Search" onkeyup="gameSearch()">
+                                <button class="btn btn-outline-success" type="button">Search</button>
+                            </form>
+                        </div>
+                        <div class ="col-7">
+                            <div class = "d-flex justify-content-end">
+                                <button class="btn btn-primary" type="submit" id = "checkout" form ="myForm"><i class="bi bi-arrow-right-circle"></i> Checkout</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form action="/cart" id="myForm" method="POST">
+                    <div class="row row-cols-3" id = "game_list">
+                        
+                            <div class="card p-0">
+                                <img src="fifa22.jpg" class="card-img-top" alt="FIFA 22">
+                                <div class="card-body">
+                                  <span class="badge rounded-pill bg-success" style="font-size:1rem;"><%= cart[0].price.toFixed(2)%>$</span>
+                                  <div class="game_title"><b>FIFA 22</b></div>
+                                  <p class="card-text">Powered by Football™, EA SPORTS™ FIFA 22 brings the game even closer to the real thing with fundamental gameplay advances and a new season of innovation across every mode..</p>
+                                </div>
+                                <div class = "input-group">
+                                  <input class="form-control" type="number" name = "nums0" value = "<%= cart[0].nums %>" id="fifa_display" >
+                                  <button type="button" class="btn btn-outline-info " onclick="increase(1)">+</button>
+                                  <button type="button" class="btn btn-outline-info " onclick="decrease(1)">-</button>  
+                                </div>
+                                
+                            </div>
+                        
+                        
+                            <div class="card p-0">
+                                <img src="footballmanager22.png" class="card-img-top" alt="Football manager 22">
+                                <div class="card-body">
+                                  <span class="badge rounded-pill bg-success" style="font-size:1rem;"><%= cart[1].price.toFixed(2)%>$</span>
+                                  <div class="game_title"><b>Football Manager 22</b></div>
+                                  <p class="card-text">The closest thing to real football management. FM22 brings new, progressive ways to find your winning edge, instill your footballing style and earn it on the pitch.</p>
+                                </div> 
+                                <div class = "input-group">
+                                  <input class="form-control" type="number" name = "nums1" value="<%= cart[1].nums %>" id="fm_display" >
+                                  <button type="button" class="btn btn-outline-info" onclick="increase(2)">+</button>
+                                  <button type="button" class="btn btn-outline-info" onclick="decrease(2)">-</button>  
+                              </div>
+                            </div>
+                        
+                
+                            <div class="card p-0">
+                                <img src="sims4.jpg" class="card-img-top" alt="The Sims 4">
+                                <div class="card-body">
+                                  <span class="badge rounded-pill bg-success" style="font-size:1rem;"><%= cart[2].price.toFixed(2) %>$</span>
+                                  <div class="game_title"><b>The Sims 4</b></div>
+                                  <p class="card-text">Play with life and discover the possibilities. Unleash your imagination and create a world of Sims that’s wholly unique. Explore and customize every detail from Sims to homes–and much more.</p>
+                                </div>
+                                <div class = "input-group">
+                                    <input class="form-control" type="number" name = "nums2" value="<%= cart[2].nums %>" id="sims_display" >
+                                    <button type="button" class="btn btn-outline-info" onclick="increase(3)">+</button>
+                                    <button type="button" class="btn btn-outline-info" onclick="decrease(3)">-</button>  
+                                </div>
+                            
+                            </div>
+                       
+                        
+                            <div class="card p-0">
+                                <img src="totalwar.jpg" class="card-img-top" alt="Total War">
+                                <div class="card-body">
+                                  <span class="badge rounded-pill bg-success" style="font-size:1rem;"><%= cart[3].price.toFixed(2) %>$</span>
+                                  <div class="game_title"><b>Total War: Rome II</b></div>
+                                  <p class="card-text">Emperor Edition is the definitive edition of ROME II, featuring an improved politics system, overhauled building chains, rebalanced battles and improved visuals in both campaign and battle.</p>
+                                </div>
+                                <div class = "input-group">
+                                    <input class="form-control" type="number" name = "nums3" value="<%= cart[3].nums %>" id="war_display">
+                                    <button type="button" class="btn btn-outline-info" onclick="increase(4)">+</button>
+                                    <button type="button" class="btn btn-outline-info" onclick="decrease(4)">-</button>  
+                                </div>
+                            </div>
+                        
+                            <div class="card p-0">
+                                <img src="witcher.jpg" class="card-img-top" alt="The Witcher 3">
+                                <div class="card-body">
+                                  <span class="badge rounded-pill bg-success" style="font-size:1rem;"><%= cart[4].price.toFixed(2) %>$</span>
+                                  <div class="game_title"><b>The Witcher 3</b></div>
+                                  <p class="card-text">The Witcher 3: As war rages on throughout the Northern Realms, you take on the greatest contract of your life — tracking down the Child of Prophecy, a living weapon that can alter the shape of the world and change your destiny.</p>
+                                </div>
+                                <div class = "input-group">
+                                    <input class="form-control" type="number" name = "nums4" value="<%= cart[4].nums %>" id="witcher_display" >
+                                    <button type="button" class="btn btn-outline-info" onclick="increase(5)">+</button>
+                                    <button type="button" class="btn btn-outline-info" onclick="decrease(5)">-</button>  
+                                </div>
+                            </div>
+                        
+                            <div class="card p-0">
+                                <img src="reddead.jpg" class="card-img-top" alt="Red Deed Redemption 2">
+                                <div class="card-body">
+                                  <span class="badge rounded-pill bg-success" style="font-size:1rem;"><%= cart[5].price.toFixed(2)%>$</span>
+                                  <div class="game_title"><b>Red Dead Redemption 2</b></div>
+                                  <p class="card-text">Winner of over 175 Game of the Year Awards and recipient of over 250 perfect scores, RDR2 is the epic tale of outlaw Arthur Morgan and the infamous Van der Linde gang, on the run across America</p>
+                                </div>
+                                <div class = "input-group">
+                                    <input class="form-control" type="number" name = "nums5" value="<%= cart[5].nums %>" id="red_display">
+                                    <button type="button" class="btn btn-outline-info" onclick="increase(6)">+</button>
+                                    <button type="button" class="btn btn-outline-info" onclick="decrease(6)">-</button>  
+                                </div>
+                            </div>
+                        
+                     </div>
+                    </form>
+                    <%- include("../partials/footer.ejs") %>
+                    <script src="/script.js"></script>
+                </div>
+                <div class="col-1"></div>
+            </div>
+       </div>
+    </body>
+</html>

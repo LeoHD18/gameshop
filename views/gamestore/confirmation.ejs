@@ -1,0 +1,60 @@
+<html>
+    <%- include("../partials/header.ejs") %>
+    <body>
+        <div class = "container">
+            <div class = "row">
+                <div class="col-1" ></div>
+                <div class="col-10">
+                    <div row class ="row g-3 bg-light" >
+                        <div class = "d-flex justify-content-start">
+                          <form action="/browse" method ="post">
+                        <button class="btn btn-danger" id ="buttonReturn" type="submit"><i class="bi bi-arrow-left-circle"></i> Back to Store</button>
+                      </form>
+                      </div>
+                      </div>
+                      
+                    <table class="table" id = "cart_table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Prices</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <% var totalcart = 0 %>
+							                <% cart.forEach(game => { %>
+                                <% if(game.nums != 0) { %>
+                                    <% var total = 0 %>
+                                <tr>
+                                    <td><img src=<%= game.img %> class = "imagecart"> <%= game.name %></td>
+                                    <td><%= game.nums %></td>
+                                    <% total = game.nums * game.price %>
+                                    <td><%= game.nums %> * <%= game.price.toFixed(2) %>$ = <%= total.toFixed(2) %>$</td>
+                                    <% totalcart += total %>
+                                  </tr>
+								                <% }%>
+							                <% }) %>
+                            <tr>
+                                <td></td>
+                                <td><b>Total</b></td>
+                                <% var tax = totalcart * 0.06 %>
+                                <% var totalAfterTax = totalcart + tax %>
+                                <td><b><%= totalcart.toFixed(2) %>$ + <%= tax.toFixed(2) %>$Tax = <%= totalAfterTax.toFixed(2) %>$</b></td>
+                              </tr>
+                        </tbody>
+                    </table>
+                    <p><h5>Ship to: <%= address.buyername %>
+                        <% var cardNumber = "****-****-****-" + address.card %>
+                        <br>Card number : <%= cardNumber %>
+                        <br>Address: <%= address.address %> <%= address.city %> <%= address.state %> <%= address.zip %>
+                        <br>Thank you for shopping with us!
+                    </h5></p>
+
+                  
+                    <%- include("../partials/footer.ejs") %>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
